@@ -14,11 +14,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer db.Close() // espera tudo rodar e depois executa o close
 	orderRepository := database.NewOrderRepository(db)
 	uc := usecase.NewCalculateFinalPrice(orderRepository)
 
 	input := usecase.OrderInput{
-		ID:    "1234",
+		ID:    "12345",
 		Price: 10.0,
 		Tax:   1.0,
 	}
